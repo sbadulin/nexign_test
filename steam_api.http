@@ -1,0 +1,16 @@
+Ищем steamId по имени
+http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=7D5F2FA02FF09ACA687DE979BE355B30&vanityurl=Tryr
+Если все пользователи найдены, то
+Ищем игры каждого пользователя по steamId
+https://api.steampowered.com/IPlayerService/GetOwnedGames/v1?key=7D5F2FA02FF09ACA687DE979BE355B30&include_played_free_games=1&format=json&steamid=76561198039833219
+Если число игр у всех пользователей больше нуля, то
+Ищем одинаковые игры у пользователей по id
+https://store.steampowered.com/api/appdetails/?appids=440
+
+потом фильтруем по категории
+"categories": [
+        {
+          "id": 1,
+          "description": "Multi-player"
+        }
+      ]
