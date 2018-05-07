@@ -17,17 +17,22 @@ class App extends Component {
   onChangeUserName = e => {
     this.setState({ userName: e.target.value });
   };
+  onClickAddUser = e => {
+    this.setState({ totalUsers: this.state.totalUsers + 1 });
+  };
   render() {
     const { userName, totalUsers } = this.state;
     let inputs = [];
     for (let i = 0; i < totalUsers; i++) {
+      let placeholderText = `Ссылка на пользователя ${i + 1}`;
       inputs.push(
         <Input
-          placeholder="Ссылка на пользователя"
+          placeholder={placeholderText}
           prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
           value={userName}
           onChange={this.onChangeUserName}
           ref={node => (this.userNameInput = node)}
+          key={i}
         />
       );
     }
@@ -37,6 +42,10 @@ class App extends Component {
           <Col span={8} offset={8}>
             <h1>Во что поиграть вместе?</h1>
             <div>{inputs}</div>
+            <h3 onClick={this.onClickAddUser}>
+              {<Icon type="plus-circle" style={{ color: 'rgba(0,0,0)' }} />}
+              Добавить пользователя
+            </h3>
             <Button type="primary">Найти общие игры</Button>
           </Col>
         </Row>
