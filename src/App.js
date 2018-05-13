@@ -9,12 +9,7 @@ class App extends Component {
       totalUsers: 3
     };
   }
-  // emitEmpty = () => {
-  //   this.userNameInput.focus();
-  //   this.setState({ userName: '' });
-  // };
   onChangeUserName = e => {
-    console.log(e.target.dataset.id);
     this.setState({ ['userName' + e.target.dataset.id]: e.target.value });
   };
   onClickAddUser = e => {
@@ -22,9 +17,10 @@ class App extends Component {
       totalUsers: this.state.totalUsers + 1
     });
   };
-  onFormSUbmit = e => {
+  onFormSubmit = e => {
     e.preventDefault();
-    console.log(e);
+    console.log(e.target.getValue());
+    // Здесь запрашиваем данные из API
   };
   render() {
     const { totalUsers } = this.state;
@@ -48,14 +44,16 @@ class App extends Component {
         <Row align="middle" justify="centre" gutter={16}>
           <Col span={8} offset={8}>
             <h1>Во что поиграть вместе?</h1>
-            <form onSubmit={this.onFormSubmit}>
+            <Form onSubmit={this.onFormSubmit}>
               <div>{inputs}</div>
               <h3 onClick={this.onClickAddUser} style={{ cursor: 'pointer' }}>
                 {<Icon type="plus-circle" style={{ color: 'rgba(0,0,0)' }} />}
                  Добавить пользователя
               </h3>
-              <Button type="submit">Найти общие игры</Button>
-            </form>
+              <Button type="primary" htmlType="submit">
+                Найти общие игры
+              </Button>
+            </Form>
           </Col>
         </Row>
       </div>
